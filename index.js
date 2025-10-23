@@ -12,6 +12,12 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("new user connection");
+  //receive data from client
+  socket.on("chat message", (msg) => {
+    console.log(msg);
+    //sent data server to client
+    io.emit("chat message", msg);
+  });
 });
 
 expressServer.listen(3000, () => {
